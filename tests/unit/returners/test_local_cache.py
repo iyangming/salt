@@ -41,7 +41,7 @@ class LocalCacheCleanOldJobsTestCase(TestCase, LoaderModuleMockMixin):
     '''
     @classmethod
     def setUpClass(cls):
-        cls.TMP_CACHE_DIR = os.path.join(RUNTIME_VARS.TMP, 'salt_test_job_cache')
+        cls.TMP_CACHE_DIR = tempfile.mkdtemp(prefix='salt_test_job_cache', dir=RUNTIME_VARS.TMP)
         cls.TMP_JID_DIR = os.path.join(cls.TMP_CACHE_DIR, 'jobs')
 
     def setup_loader_modules(self):
@@ -55,7 +55,7 @@ class LocalCacheCleanOldJobsTestCase(TestCase, LoaderModuleMockMixin):
         _make_tmp_jid_dirs replaces it.
         '''
         if os.path.exists(self.TMP_CACHE_DIR):
-            shutil.rmtree(self.TMP_CACHE_DIR)
+            shutil.rmtree(self.TMP_CACHE_DIR, ignore_errors=True)
 
     def test_clean_old_jobs_no_jid_root(self):
         '''
@@ -222,7 +222,7 @@ class Local_CacheTest(TestCase, AdaptedConfigurationTestCaseMixin, LoaderModuleM
 
     @classmethod
     def setUpClass(cls):
-        cls.TMP_CACHE_DIR = os.path.join(RUNTIME_VARS.TMP, 'rootdir', 'cache')
+        cls.TMP_CACHE_DIR = tempfile.mkdtemp(prefix='salt_test_local_cache', dir=RUNTIME_VARS.TMP)
         cls.JOBS_DIR = os.path.join(cls.TMP_CACHE_DIR, 'jobs')
         cls.JID_DIR = os.path.join(cls.JOBS_DIR, '31', 'c56eed380a4e899ae12bc42563cfdfc53066fb4a6b53e2378a08ac49064539')
         cls.JID_FILE = os.path.join(cls.JID_DIR, 'jid')
@@ -239,7 +239,7 @@ class Local_CacheTest(TestCase, AdaptedConfigurationTestCaseMixin, LoaderModuleM
                 attr_instance = getattr(cls, attrname)
                 if isinstance(attr_instance, six.string_types):
                     if os.path.isdir(attr_instance):
-                        shutil.rmtree(attr_instance)
+                        shutil.rmtree(attr_instance, ignore_errors=True)
                     elif os.path.isfile(attr_instance):
                         os.unlink(attr_instance)
                 delattr(cls, attrname)
