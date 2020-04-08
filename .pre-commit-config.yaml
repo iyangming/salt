@@ -429,12 +429,14 @@ repos:
     rev: '1e78a9acf3110e1f9721feb591f89a451fc9876a'
     hooks:
       - id: isort
+        exclude: ^salt/ext/.*$
 
   - repo: https://github.com/psf/black
     rev: stable
     hooks:
       - id: black
         language_version: python3.7
+        exclude: ^salt/ext/.*$
 
   - repo: https://github.com/saltstack/salt-nox-pre-commit
     rev: master
