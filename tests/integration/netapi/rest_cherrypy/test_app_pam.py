@@ -19,9 +19,9 @@ from tests.support.unit import skipIf
 if cptc.HAS_CHERRYPY:
     import cherrypy
 
-USERA = 'saltdev-netapi'
-USERA_PWD = 'saltdev'
-HASHED_USERA_PWD = '$6$SALTsalt$ZZFD90fKFWq8AGmmX0L3uBtS9fXL62SrTk5zcnQ6EkD6zoiM3kB88G1Zvs0xm/gZ7WXJRs5nsTBybUvGSqZkT.'
+USERA = "saltdev-netapi"
+USERA_PWD = "saltdev"
+HASHED_USERA_PWD = "$6$SALTsalt$ZZFD90fKFWq8AGmmX0L3uBtS9fXL62SrTk5zcnQ6EkD6zoiM3kB88G1Zvs0xm/gZ7WXJRs5nsTBybUvGSqZkT."
 
 AUTH_CREDS = {"username": USERA, "password": USERA_PWD, "eauth": "pam"}
 
