@@ -3,20 +3,14 @@
 integration tests for mac_pkgutil
 """
 
-# Import Python libs
 from __future__ import absolute_import, print_function, unicode_literals
 
 import os
 
 import pytest
-
-# Import Salt libs
 import salt.utils.path
 import salt.utils.platform
 from tests.support.case import ModuleCase
-from tests.support.helpers import destructiveTest
-
-# Import Salt Testing libs
 from tests.support.runtests import RUNTIME_VARS
 
 TEST_PKG_URL = (
@@ -76,7 +70,7 @@ class MacPkgutilModuleTest(ModuleCase):
         # Test Package is not installed
         self.assertFalse(self.run_function("pkgutil.is_installed", ["spongebob"]))
 
-    @destructiveTest
+    @pytest.mark.destructive_test
     def test_install_forget(self):
         """
         Test pkgutil.install

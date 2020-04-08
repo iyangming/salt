@@ -10,23 +10,16 @@ Time sync do the following:
     - Set time to 'Do not sync'
 """
 
-# Import Python libs
 from __future__ import absolute_import, print_function, unicode_literals
 
 import datetime
 
 import pytest
-
-# Import Salt libs
 import salt.utils.path
 import salt.utils.platform
-
-# Import 3rd Party libs
 from salt.ext import six
-
-# Import Salt Testing libs
 from tests.support.case import ModuleCase
-from tests.support.helpers import destructiveTest, flaky
+from tests.support.helpers import flaky
 from tests.support.unit import skipIf
 
 
@@ -75,7 +68,7 @@ class MacTimezoneModuleTest(ModuleCase):
         True,
         "Skip until we can figure out why modifying the system clock causes ZMQ errors",
     )
-    @destructiveTest
+    @pytest.mark.destructive_test
     def test_get_set_date(self):
         """
         Test timezone.get_date
@@ -105,7 +98,7 @@ class MacTimezoneModuleTest(ModuleCase):
         True,
         "Skip until we can figure out why modifying the system clock causes ZMQ errors",
     )
-    @destructiveTest
+    @pytest.mark.destructive_test
     def test_set_time(self):
         """
         Test timezone.set_time
@@ -123,7 +116,7 @@ class MacTimezoneModuleTest(ModuleCase):
         True,
         "Skip until we can figure out why modifying the system clock causes ZMQ errors",
     )
-    @destructiveTest
+    @pytest.mark.destructive_test
     def test_get_set_zone(self):
         """
         Test timezone.get_zone
@@ -143,7 +136,7 @@ class MacTimezoneModuleTest(ModuleCase):
         True,
         "Skip until we can figure out why modifying the system clock causes ZMQ errors",
     )
-    @destructiveTest
+    @pytest.mark.destructive_test
     def test_get_offset(self):
         """
         Test timezone.get_offset
@@ -164,7 +157,7 @@ class MacTimezoneModuleTest(ModuleCase):
         True,
         "Skip until we can figure out why modifying the system clock causes ZMQ errors",
     )
-    @destructiveTest
+    @pytest.mark.destructive_test
     def test_get_set_zonecode(self):
         """
         Test timezone.get_zonecode
@@ -195,7 +188,7 @@ class MacTimezoneModuleTest(ModuleCase):
         True,
         "Skip until we can figure out why modifying the system clock causes ZMQ errors",
     )
-    @destructiveTest
+    @pytest.mark.destructive_test
     def test_zone_compare(self):
         """
         Test timezone.zone_compare
@@ -208,7 +201,7 @@ class MacTimezoneModuleTest(ModuleCase):
         True,
         "Skip until we can figure out why modifying the system clock causes ZMQ errors",
     )
-    @destructiveTest
+    @pytest.mark.destructive_test
     def test_get_set_using_network_time(self):
         """
         Test timezone.get_using_network_time
@@ -224,7 +217,7 @@ class MacTimezoneModuleTest(ModuleCase):
         True,
         "Skip until we can figure out why modifying the system clock causes ZMQ errors",
     )
-    @destructiveTest
+    @pytest.mark.destructive_test
     def test_get_set_time_server(self):
         """
         Test timezone.get_time_server

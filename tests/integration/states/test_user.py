@@ -7,7 +7,6 @@ user present
 user present with custom homedir
 """
 
-# Import Python libs
 from __future__ import absolute_import, print_function, unicode_literals
 
 import os
@@ -15,13 +14,9 @@ import sys
 from random import randint
 
 import pytest
-
-# Import Salt libs
 import salt.utils.platform
-
-# Import Salt Testing libs
 from tests.support.case import ModuleCase
-from tests.support.helpers import destructiveTest, requires_system_grains
+from tests.support.helpers import requires_system_grains
 from tests.support.mixins import SaltReturnAssertsMixin
 from tests.support.unit import skipIf
 
@@ -47,7 +42,7 @@ else:
     NOGROUPGID = "nogroup"
 
 
-@destructiveTest
+@pytest.mark.destructive_test
 @pytest.mark.skip_if_not_root
 class UserTest(ModuleCase, SaltReturnAssertsMixin):
     """
@@ -294,7 +289,7 @@ class UserTest(ModuleCase, SaltReturnAssertsMixin):
         self.assertSaltTrueReturn(self.run_state("user.absent", name=self.user_name))
 
 
-@destructiveTest
+@pytest.mark.destructive_test
 @pytest.mark.skip_if_not_root
 @skipIf(not salt.utils.platform.is_windows(), "Windows only tests")
 class WinUserTest(ModuleCase, SaltReturnAssertsMixin):

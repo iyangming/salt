@@ -7,7 +7,6 @@
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 """
 
-# Import python libs
 from __future__ import absolute_import, print_function, unicode_literals
 
 import errno
@@ -17,10 +16,7 @@ import pprint
 import shutil
 import sys
 
-# Import 3rd-party libs
 import pytest
-
-# Import salt libs
 import salt.utils.files
 import salt.utils.path
 import salt.utils.platform
@@ -31,11 +27,8 @@ import salt.utils.win_runas
 from salt.exceptions import CommandExecutionError
 from salt.ext import six
 from salt.modules.virtualenv_mod import KNOWN_BINARY_NAMES
-
-# Import Salt Testing libs
 from tests.support.case import ModuleCase
 from tests.support.helpers import (
-    destructiveTest,
     patched_environ,
     requires_system_grains,
     with_system_user,
@@ -288,7 +281,7 @@ class PipStateTest(ModuleCase, SaltReturnAssertsMixin):
                     "the --mirrors arg has been deprecated and removed in pip==7.0.0"
                 )
 
-    @destructiveTest
+    @pytest.mark.destructive_test
     @pytest.mark.skip_if_not_root
     @with_system_user(
         "issue-6912", on_existing="delete", delete=True, password="PassWord1!"
@@ -339,7 +332,7 @@ class PipStateTest(ModuleCase, SaltReturnAssertsMixin):
                 elif salt.utils.platform.is_windows():
                     self.assertEqual(salt.utils.win_dacl.get_owner(path), username)
 
-    @destructiveTest
+    @pytest.mark.destructive_test
     @pytest.mark.skip_if_not_root
     @skipIf(salt.utils.platform.is_darwin(), "Test is flaky on macosx")
     @with_system_user(

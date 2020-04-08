@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-# Import Python libs
 from __future__ import absolute_import, print_function, unicode_literals
 
 import os
@@ -8,16 +7,12 @@ import shutil
 import tempfile
 import textwrap
 
-# Import 3rd-party libs
 import pytest
-
-# Import Salt libs
 import salt.utils.files
 import salt.utils.platform
 import salt.utils.yaml
 from salt.ext import six
 from tests.support.case import ShellCase
-from tests.support.helpers import destructiveTest
 from tests.support.mixins import ShellCaseCommonTestsMixin
 
 # Import Salt Testing libs
@@ -206,7 +201,7 @@ class KeyTest(ShellCase, ShellCaseCommonTestsMixin):
         self.assertEqual(data, expect)
 
     @pytest.mark.skip_if_not_root
-    @destructiveTest
+    @pytest.mark.destructive_test
     def test_list_acc_eauth(self):
         """
         test salt-key -l with eauth
@@ -220,7 +215,7 @@ class KeyTest(ShellCase, ShellCaseCommonTestsMixin):
         self._remove_user()
 
     @pytest.mark.skip_if_not_root
-    @destructiveTest
+    @pytest.mark.destructive_test
     def test_list_acc_eauth_bad_creds(self):
         """
         test salt-key -l with eauth and bad creds

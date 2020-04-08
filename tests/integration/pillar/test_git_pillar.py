@@ -64,15 +64,12 @@ https://github.com/git/git/commit/6bc0cb5
 https://github.com/unbit/uwsgi/commit/ac1e354
 """
 
-# Import Python libs
 from __future__ import absolute_import, print_function, unicode_literals
 
 import random
 import string
 
 import pytest
-
-# Import Salt libs
 import salt.utils.path
 import salt.utils.platform
 from salt.ext.six.moves import range  # pylint: disable=redefined-builtin
@@ -85,15 +82,13 @@ from salt.utils.gitfs import (
     PYGIT2_MINVER,
     PYGIT2_VERSION,
 )
-
-# Import Salt Testing libs
 from tests.support.gitfs import (
     PASSWORD,
     USERNAME,
     GitPillarHTTPTestBase,
     GitPillarSSHTestBase,
 )
-from tests.support.helpers import destructiveTest, requires_system_grains
+from tests.support.helpers import requires_system_grains
 from tests.support.unit import skipIf
 
 # Check for requisite components
@@ -582,9 +577,9 @@ class GitPythonMixin(object):
         )
 
 
-@destructiveTest
 @skipIf(_windows_or_mac(), "minion is windows or mac")
 @pytest.mark.skip_if_not_root
+@pytest.mark.destructive_test
 @skipIf(not HAS_GITPYTHON, "GitPython >= {0} required".format(GITPYTHON_MINVER))
 @skipIf(not HAS_SSHD, "sshd not present")
 class TestGitPythonSSH(GitPillarSSHTestBase, GitPythonMixin):
@@ -642,9 +637,9 @@ class TestGitPythonAuthenticatedHTTP(TestGitPythonHTTP, GitPythonMixin):
         cls.ext_opts["password"] = cls.password
 
 
-@destructiveTest
 @skipIf(_windows_or_mac(), "minion is windows or mac")
 @pytest.mark.skip_if_not_root
+@pytest.mark.destructive_test
 @skipIf(
     not HAS_PYGIT2,
     "pygit2 >= {0} and libgit2 >= {1} required".format(PYGIT2_MINVER, LIBGIT2_MINVER),

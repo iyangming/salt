@@ -6,17 +6,13 @@ from __future__ import absolute_import, print_function, unicode_literals
 import random
 import string
 
-# Import Salt Testing libs
 import pytest
 import salt.utils.files
 import salt.utils.platform
 import salt.utils.stringutils
-
-# Import Salt libs
 from salt.ext import six
 from salt.ext.six.moves import range
 from tests.support.case import ModuleCase
-from tests.support.helpers import destructiveTest
 from tests.support.unit import skipIf
 
 if not salt.utils.platform.is_windows():
@@ -24,7 +20,7 @@ if not salt.utils.platform.is_windows():
 
 
 @pytest.mark.skip_if_not_root
-@destructiveTest
+@pytest.mark.destructive_test
 class GroupModuleTest(ModuleCase):
     """
     Validate the linux group system module
@@ -105,7 +101,7 @@ class GroupModuleTest(ModuleCase):
             if gid not in busy_gids:
                 return gid
 
-    @destructiveTest
+    @pytest.mark.destructive_test
     def test_add(self):
         """
         Test the add group function
@@ -118,7 +114,7 @@ class GroupModuleTest(ModuleCase):
         # try adding the group again
         self.assertFalse(self.run_function("group.add", [self._group], gid=self._gid))
 
-    @destructiveTest
+    @pytest.mark.destructive_test
     @skipIf(salt.utils.platform.is_windows(), "Skip on Windows")
     def test_add_system_group(self):
         """
@@ -135,7 +131,7 @@ class GroupModuleTest(ModuleCase):
         # try adding the group again
         self.assertFalse(self.run_function("group.add", [self._group]))
 
-    @destructiveTest
+    @pytest.mark.destructive_test
     @skipIf(salt.utils.platform.is_windows(), "Skip on Windows")
     def test_add_system_group_gid(self):
         """
@@ -152,7 +148,7 @@ class GroupModuleTest(ModuleCase):
         # try adding the group again
         self.assertFalse(self.run_function("group.add", [self._group, gid]))
 
-    @destructiveTest
+    @pytest.mark.destructive_test
     def test_delete(self):
         """
         Test the delete group function

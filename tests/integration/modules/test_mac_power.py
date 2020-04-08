@@ -3,18 +3,13 @@
 integration tests for mac_power
 """
 
-# Import Python libs
 from __future__ import absolute_import, print_function, unicode_literals
 
 import pytest
-
-# Import Salt libs
 import salt.utils.path
 import salt.utils.platform
-
-# Import Salt Testing libs
 from tests.support.case import ModuleCase
-from tests.support.helpers import destructiveTest, flaky
+from tests.support.helpers import flaky
 from tests.support.unit import skipIf
 
 
@@ -46,7 +41,7 @@ class MacPowerModuleTest(ModuleCase):
         self.run_function("power.set_display_sleep", [self.DISPLAY_SLEEP])
         self.run_function("power.set_harddisk_sleep", [self.HARD_DISK_SLEEP])
 
-    @destructiveTest
+    @pytest.mark.destructive_test
     def test_computer_sleep(self):
         """
         Test power.get_computer_sleep
@@ -79,7 +74,7 @@ class MacPowerModuleTest(ModuleCase):
             self.run_function("power.set_computer_sleep", [True]),
         )
 
-    @destructiveTest
+    @pytest.mark.destructive_test
     def test_display_sleep(self):
         """
         Test power.get_display_sleep
@@ -112,7 +107,7 @@ class MacPowerModuleTest(ModuleCase):
             self.run_function("power.set_display_sleep", [True]),
         )
 
-    @destructiveTest
+    @pytest.mark.destructive_test
     def test_harddisk_sleep(self):
         """
         Test power.get_harddisk_sleep

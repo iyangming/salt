@@ -9,9 +9,6 @@
 
     Test support helpers
 """
-# pylint: disable=repr-flag-used-in-string,wrong-import-order
-
-# Import Python libs
 from __future__ import absolute_import, print_function, unicode_literals
 
 import base64
@@ -35,24 +32,16 @@ import types
 
 import salt.ext.tornado.ioloop
 import salt.ext.tornado.web
-
-# Import Salt libs
 import salt.utils.files
 import salt.utils.platform
 import salt.utils.stringutils
 from pytestsalt.utils import get_unused_localhost_port
-
-# Import 3rd-party libs
 from salt.ext import six
-from salt.ext.six.moves import (  # pylint: disable=import-error,redefined-builtin
-    builtins,
-    range,
-)
+from salt.ext.six.moves import range  # pylint: disable=import-error,redefined-builtin
+from salt.ext.six.moves import builtins
 from tests.support.mock import patch
 from tests.support.runtests import RUNTIME_VARS
 from tests.support.sminion import create_sminion
-
-# Import Salt Tests Support libs
 from tests.support.unit import SkipTest, _id, skip
 
 log = logging.getLogger(__name__)
@@ -84,48 +73,6 @@ def no_symlinks():
     if output.strip() == "true":
         HAS_SYMLINKS = True
     return not HAS_SYMLINKS
-
-
-def destructiveTest(caller):
-    """
-    Mark a test case as a destructive test for example adding or removing users
-    from your system.
-
-    .. code-block:: python
-
-        class MyTestCase(TestCase):
-
-            @destructiveTest
-            def test_create_user(self):
-                pass
-    """
-    # Late import
-    from tests.support.runtests import RUNTIME_VARS
-
-    if RUNTIME_VARS.PYTEST_SESSION:
-        setattr(caller, "__destructive_test__", True)
-
-    if inspect.isclass(caller):
-        # We're decorating a class
-        old_setup = getattr(caller, "setUp", None)
-
-        def setUp(self, *args, **kwargs):
-            if os.environ.get("DESTRUCTIVE_TESTS", "False").lower() == "false":
-                self.skipTest("Destructive tests are disabled")
-            if old_setup is not None:
-                old_setup(self, *args, **kwargs)
-
-        caller.setUp = setUp
-        return caller
-
-    # We're simply decorating functions
-    @functools.wraps(caller)
-    def wrap(cls):
-        if os.environ.get("DESTRUCTIVE_TESTS", "False").lower() == "false":
-            cls.skipTest("Destructive tests are disabled")
-        return caller(cls)
-
-    return wrap
 
 
 def expensiveTest(caller):
@@ -297,13 +244,13 @@ class RedirectStdStreams(object):
         import salt.utils.files
 
         if stdout is None:
-            stdout = salt.utils.files.fopen(
+            stdout = salt.utils.files.fopen(  # pylint: disable=resource-leakage
                 os.devnull, "w"
-            )  # pylint: disable=resource-leakage
+            )
         if stderr is None:
-            stderr = salt.utils.files.fopen(
+            stderr = salt.utils.files.fopen(  # pylint: disable=resource-leakage
                 os.devnull, "w"
-            )  # pylint: disable=resource-leakage
+            )
 
         self.__stdout = stdout
         self.__stderr = stderr
@@ -1003,9 +950,9 @@ class WithTempfile(object):
     def __call__(self, func):
         self.func = func
         return functools.wraps(func)(
-            lambda testcase, *args, **kwargs: self.wrap(
+            lambda testcase, *args, **kwargs: self.wrap(  # pylint: disable=unnecessary-lambda
                 testcase, *args, **kwargs
-            )  # pylint: disable=W0108
+            )
         )
 
     def wrap(self, testcase, *args, **kwargs):
@@ -1034,9 +981,9 @@ class WithTempdir(object):
     def __call__(self, func):
         self.func = func
         return functools.wraps(func)(
-            lambda testcase, *args, **kwargs: self.wrap(
+            lambda testcase, *args, **kwargs: self.wrap(  # pylint: disable=unnecessary-lambda
                 testcase, *args, **kwargs
-            )  # pylint: disable=W0108
+            )
         )
 
     def wrap(self, testcase, *args, **kwargs):
