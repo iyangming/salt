@@ -31,7 +31,8 @@ def salt_proxy(request, salt_factories, salt_master):
 
 
 def pytest_saltfactories_proxy_minion_configuration_defaults(
-        request, factories_manager, root_dir, proxy_minion_id, master_port):
+    request, factories_manager, root_dir, proxy_minion_id, master_port
+):
     """
     Hook which should return a dictionary tailored for the provided proxy_minion_id
 
