@@ -30,6 +30,7 @@ import threading
 import time
 import types
 
+import pytest
 import salt.ext.tornado.ioloop
 import salt.ext.tornado.web
 import salt.utils.files
@@ -37,8 +38,7 @@ import salt.utils.platform
 import salt.utils.stringutils
 from pytestsalt.utils import get_unused_localhost_port
 from salt.ext import six
-from salt.ext.six.moves import range  # pylint: disable=import-error,redefined-builtin
-from salt.ext.six.moves import builtins
+from salt.ext.six.moves import builtins, range
 from tests.support.mock import patch
 from tests.support.runtests import RUNTIME_VARS
 from tests.support.sminion import create_sminion
@@ -47,6 +47,15 @@ from tests.support.unit import SkipTest
 log = logging.getLogger(__name__)
 
 HAS_SYMLINKS = None
+
+
+PRE_PYTEST_SKIP_OR_NOT = "PRE_PYTEST_DONT_SKIP" not in os.environ
+PRE_PYTEST_SKIP_REASON = (
+    "PRE PYTEST - This test was skipped before running under pytest"
+)
+PRE_PYTEST_SKIP = pytest.mark.skipif(
+    PRE_PYTEST_SKIP_OR_NOT, reason=PRE_PYTEST_SKIP_REASON
+)
 
 
 def no_symlinks():
