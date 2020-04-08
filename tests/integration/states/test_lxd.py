@@ -10,7 +10,6 @@ import pytest
 # Import salt utils
 import salt.utils.path
 from tests.support.case import ModuleCase
-from tests.support.helpers import flaky
 from tests.support.mixins import SaltReturnAssertsMixin
 
 # Import Salt Testing Libs
@@ -32,7 +31,7 @@ class LxdTestCase(ModuleCase, SaltReturnAssertsMixin):
 
     run_once = False
 
-    @flaky
+    @pytest.mark.flaky(max_runs=4)
     def test_01__init_lxd(self):
         if LxdTestCase.run_once:
             return
