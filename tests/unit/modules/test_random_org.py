@@ -3,17 +3,11 @@
     :codeauthor: Jayesh Kariya <jayeshk@saltstack.com>
 """
 
-# Import Python Libs
 from __future__ import absolute_import, print_function, unicode_literals
 
-# Import 3rd-party libs
 import pytest
-
-# Import Salt Libs
 import salt.modules.random_org as random_org
 from salt.ext.tornado.httpclient import HTTPClient
-
-# Import Salt Testing Libs
 from tests.support.mixins import LoaderModuleMockMixin
 from tests.support.unit import TestCase, skipIf
 from tornado.httpclient import HTTPClient
