@@ -4,19 +4,15 @@
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 """
 
-# Import Python libs
 from __future__ import absolute_import
 
 import fnmatch
 import os
 
-# Import Salt libs
 import salt.utils.path
 import salt.utils.stringutils
 from tests.support.paths import list_test_mods
 from tests.support.runtests import RUNTIME_VARS
-
-# Import Salt Testing libs
 from tests.support.unit import TestCase
 
 EXCLUDED_DIRS = [
@@ -51,6 +47,8 @@ EXCLUDED_FILES = [
     os.path.join("tests", "zypp_plugin.py"),
     os.path.join("tests", "unit", "transport", "mixins.py"),
     os.path.join("tests", "integration", "utils", "testprogram.py"),
+    os.path.join("tests", "unit", "test_pytest_pass_fail.py"),
+    os.path.join("tests", "unit", "utils", "scheduler", "base.py"),
 ]
 
 
@@ -112,6 +110,7 @@ class BadTestModuleNamesTestCase(TestCase):
         consider mapping it to files manually via tests/filename_map.yml.
         """
         ignore = (
+            "unit.test_pytest_pass_fail",
             "unit.test_doc",
             "unit.test_mock",
             "unit.test_module_names",
