@@ -2,18 +2,13 @@
 """
 Tests for the Reg State
 """
-# Import Python libs
 from __future__ import absolute_import, print_function, unicode_literals
 
 import logging
 
 import pytest
-
-# Import Salt libs
 import salt.utils.platform
 import salt.utils.win_reg as reg
-
-# Import Salt Testing libs
 from tests.support.case import ModuleCase
 from tests.support.helpers import generate_random_name
 from tests.support.mixins import SaltReturnAssertsMixin
@@ -32,6 +27,7 @@ FAKE_KEY = "SOFTWARE\\{0}".format(generate_random_name("SaltTesting-"))
 
 @pytest.mark.destructive_test
 @skipIf(not salt.utils.platform.is_windows(), "Windows Specific Test")
+@pytest.mark.windows_whitelisted
 class RegTest(ModuleCase, SaltReturnAssertsMixin):
     """
     Reg state module tests

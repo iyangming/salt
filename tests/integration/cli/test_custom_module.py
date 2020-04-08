@@ -29,13 +29,13 @@
     localhost:
         olleh
 """
-# Import Python libs
 from __future__ import absolute_import, print_function, unicode_literals
 
-# Import test Libs
+import pytest
 from tests.support.case import SSHCase
 
 
+@pytest.mark.windows_whitelisted
 class SSHCustomModuleTest(SSHCase):
     """
     Test sls with custom module functionality using ssh

@@ -12,7 +12,7 @@ import string
 
 import pytest
 import salt.utils.platform
-from salt.ext.six.moves import range  # pylint: disable=import-error,redefined-builtin
+from salt.ext.six.moves import range
 from salt.utils.pycrypto import gen_hash
 from tests.support.case import ModuleCase, ShellCase
 from tests.support.helpers import requires_salt_states
@@ -41,10 +41,11 @@ def gen_password():
     return password, hashed_pwd
 
 
-@requires_salt_states("user.absent", "user.present")
 @skipIf(pwd is None or grp is None, "No pwd or grp module available")
 @pytest.mark.skip_if_not_root
 @pytest.mark.destructive_test
+@pytest.mark.windows_whitelisted
+@requires_salt_states("user.absent", "user.present")
 @pytest.mark.requires_salt_modules("shadow.set_password")
 class UserAuthTest(ModuleCase, SaltReturnAssertsMixin, ShellCase):
     """

@@ -1,19 +1,15 @@
 # -*- coding: utf-8 -*-
 
-# Import Python libs
 from __future__ import absolute_import
 
 import pytest
-
-# Import Salt libs
 import salt.utils.platform
-
-# Import Salt Testing libs
 from tests.support.case import ModuleCase
 from tests.support.unit import skipIf
 
 
 @skipIf(not salt.utils.platform.is_windows(), "windows test only")
+@pytest.mark.windows_whitelisted
 class WinDNSTest(ModuleCase):
     """
     Test for salt.modules.win_dns_client

@@ -5,21 +5,17 @@
     tests.integration.modules.pw_user
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 """
-# Import python libs
 from __future__ import absolute_import, print_function, unicode_literals
 
 import random
 import string
 
 import pytest
-
-# Import 3rd-party libs
-from salt.ext.six.moves import range  # pylint: disable=import-error,redefined-builtin
-
-# Import Salt Testing libs
+from salt.ext.six.moves import range
 from tests.support.case import ModuleCase
 
 
+@pytest.mark.windows_whitelisted
 class PwUserModuleTest(ModuleCase):
     def setUp(self):
         super(PwUserModuleTest, self).setUp()

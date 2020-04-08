@@ -17,6 +17,7 @@ from tests.support.unit import skipIf
 
 
 @pytest.mark.destructive_test
+@pytest.mark.windows_whitelisted
 class ServiceModuleTest(ModuleCase):
     """
     Module testing the service module
